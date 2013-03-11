@@ -1,0 +1,14 @@
+{
+	"name": "tap",
+	"version": "0.1",
+	"description": "A multi-tenant streaming server which provides isolated streams for an URL",
+	"dependencies": {
+		"socket.io": "~0.9.6",
+		"mime": "~1.2.7",
+		"express",
+		"redis",
+		"util",
+		"http",
+		"fs"
+	}
+}
