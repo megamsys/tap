@@ -25,7 +25,7 @@ mime = require('mime'),
 redis = require('redis');
 
 var tap_tenant = require('./lib/tap_tenant');
-var app_yaml  = require('./lib/tap_config.js');
+//var app_yaml  = require('./lib/tap_config.js');              //To use after connect config file
 
 
 /**
@@ -36,13 +36,17 @@ var app = require('express')()
 var server = http.createServer(app)
 tap_tenant.listen(server);
 
-server.listen(app_yaml.server.port);
-console.log("Tap Server :<version> listening on port ="+app_yaml.server.port)
+server.listen(7000);                                                 //modifeid
+console.log("Tap Server :<version> listening on port =7000");
 
 
-app.get('/streams/log', function(req, res) {
+console.log("server created");
+/*It is sends the index.html file  */
+app.get('/', function(req, res) {                                     
 	/** call the subscribe code. in tap_source before the send
 	 **/
-
-	res.sendfile(__dirname + '/index.html');
+        console.log(req.url);
+	res.sendfile(__dirname + '/public/index.html');
 });
+ 
+
