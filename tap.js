@@ -39,10 +39,10 @@ tap_tenant.listen(server);
 server.listen(yaml.config.server.port);
 console.log("Tap Server:"+yaml.version+" listening on port ="+yaml.config.server.port);
 
-
-app.get('/streams/log', function(req, res) {
+/*It is sends the index.html file  */
+app.get('/', function(req, res) {                                     
 	/** call the subscribe code. in tap_source before the send
 	 **/
-
-	res.sendfile(__dirname + '/index.html');
+     console.log(req.url);
+	res.sendfile(__dirname + '/public/index.html');
 });
