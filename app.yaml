@@ -17,7 +17,7 @@ production:
     host: '127.0.0.1'
   redis:
     port: 6379                # redis server port
-    host: '127.0.0.1'         # redis host
+    host: 'redis-master.megam.co.in'         # redis host
     password: ''              # to use with AUTH
     db: 1                     # the test db
     options: {}

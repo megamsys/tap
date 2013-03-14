@@ -41,7 +41,9 @@
 		"js-yaml": "~2.0.3",
 		"yaml-config": "~0.2.1",
 		"log": "~1.3.1",
-		"uglify-js": "~2.2.5"
+		"uglify-js": "~2.2.5",
+		"forever-monitor":"~1.1.0",
+		"cluster":"~0.7.7"
 	},
 	"engine": "~0.10.0"
 }
