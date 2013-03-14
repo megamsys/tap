@@ -12,5 +12,12 @@ test:
   redis:
     db: 12
 production:
+  server:
+    port: 8000
+    host: '127.0.0.1'
   redis:
-    db: 0
+    port: 6379                # redis server port
+    host: '127.0.0.1'         # redis host
+    password: ''              # to use with AUTH
+    db: 1                     # the test db
+    options: {}

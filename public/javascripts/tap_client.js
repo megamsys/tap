@@ -1,11 +1,13 @@
 var socket = io.connect('http://localhost/');
+            var i=0;
              $(document).ready(function() {
             console.log("start");
-            
+
             var content = $('#content');
 
             socket.on('connect', function() {
-                 alert("connected");
+                  i=i+1;
+                 alert("connected-- "+i);
 
             });
             socket.on('message', function(data){
