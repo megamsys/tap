@@ -1,8 +1,7 @@
-var socket = io.connect('http://localhost/');
+var socket = io.connect('http://nodejs1.megam.co.in/');
             var i=0;
              $(document).ready(function() {
             console.log("start");
-
             var content = $('#content');
 
             socket.on('connect', function() {
