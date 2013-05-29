@@ -14,23 +14,14 @@
  ** limitations under the License.
  */
 
-var fs = require('fs'),
-io = require('socket.io'),
-net = require('net'),
-util = require('util'),
-url = require('url'),
-http = require('http'),
-path = require('path'),
-mime = require('mime'),
-redis = require('redis');
+var fs = require('fs'), io = require('socket.io'), net = require('net'), util = require('util'), url = require('url'), http = require('http'), path = require('path'), mime = require('mime'), redis = require('redis');
 
 var tap_tenant = require('./lib/tap_tenant.js');
-var yaml  = require('./lib/tap_config.js');
-
+var yaml = require('./lib/tap_config.js');
 
 /**
- * Create a server to listen on port 7000.
- * TO-DO: Make port configurable in a js or json file.
+ * Create a server to listen on port 7000. TO-DO: Make port configurable in a js
+ * or json file.
  */
 var express = require('express');
 var app = express();
@@ -38,18 +29,22 @@ var server = http.createServer(app)
 tap_tenant.listen(server);
 
 server.listen(yaml.config.server.port);
-console.log("Tap Server:"+yaml.version+" listening on port ="+yaml.config.server.port);
+console.log("Tap Server:" + yaml.version + " listening on port ="
+		+ yaml.config.server.port);
 
-/*It is sends the index.html file  */
-app.get('/streams/:id', function(req, res) {                                     
-	/** call the subscribe code. in tap_source before the send
-	 **/
-	 console.log(req.url);
-	 console.log("param name"+req.params.id);
+/* It is sends the index.html file */
+app.get('/streams/:id', function(req, res) {
+	/**
+	 * call the subscribe code. in tap_source before the send
+	 */
+	console.log(req.url);
+	console.log("param name" + req.params.id);
 	res.sendfile(__dirname + '/public/index.html');
-	exports.logname=req.params.id;   /* exports the request id to tap_tenant.js file*/
+	exports.logname = req.params.id; /*
+										 * exports the request id to
+										 * tap_tenant.js file
+										 */
 });
 
-
-/*This take the typical use-case of serving files in ./public */
+/* This take the typical use-case of serving files in ./public */
 app.use(express.static(__dirname + '/public'));
