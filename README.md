@@ -13,8 +13,11 @@ This approach can be extend to cloud integration using our RESTful connector bed
 [Node.js +](http://nodejs.org/)
 [Socket.io +](http://socket.io/)
 [Express framework ]
+
 [Redis](http://redis.io/)
+
 [Logstash](http://logstash.net/)
+
 [deccanplato](https://github.com/indykish/deccanplato/)[(Optional)]
 
 ### Logstash Configuration file
