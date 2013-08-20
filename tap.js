@@ -33,13 +33,16 @@ console.log("Tap Server:" + yaml.version + " listening on port ="
 		+ yaml.config.server.port);
 
 /* It is sends the index.html file */
-app.get('/streams/:id', function(req, res) {
+app.get('/:id', function(req, res) {
 	/**
 	 * call the subscribe code. in tap_source before the send
 	 */
-	console.log(req.url);
+	console.log(req.url);	
 	console.log("param name" + req.params.id);
-	res.sendfile(__dirname + '/public/index.html');
+	console.log("--------------------->"+__dirname);
+	res.sendfile(__dirname + '/public/index.html');	
+	//res.sendfile('/home/rajthilak/code/megam/workspace/nilavu/app/views/cloud_books_histories/index.html');
+	//res.send('hai');
 	exports.logname = req.params.id; /*
 										 * exports the request id to
 										 * tap_tenant.js file
