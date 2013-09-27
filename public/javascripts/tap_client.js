@@ -11,7 +11,7 @@
 
             });
             socket.on('message', function(data){
-                  $('#mmm').append($('<li></li>').text(data));                
+                  $('#mmm').append($('<li></li>').text(data.name));                
             }) ;
 
             socket.on('disconnect', function() {
