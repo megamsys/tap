@@ -4,7 +4,7 @@ var util = require('util'),
 
 script = path.join(__dirname, './tap_cluster.js');
         
-var child1 = new (forever.Monitor)(script, { 'options': [ "--conf=default"] });
+var child1 = new (forever.Monitor)(script, { 'options': [ "--conf=production"] });
 child1.start();
 
 
