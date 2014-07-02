@@ -14,7 +14,7 @@
 ** limitations under the License.
 */
 
-var fs = require('fs'), io = require('socket.io'), net = require('net'), util = require('util'), url = require('url'), http = require('http'), path = require('path'), mime = require('mime'), redis = require('redis');
+var fs = require('fs'), io = require('socket.io'), net = require('net'), util = require('util'), url = require('url'), http = require('http'), path = require('path'), mime = require('mime');
 
 var tap_tenant = require('./lib/tap_tenant.js');
 var yaml = require('./lib/tap_config.js');

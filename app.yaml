@@ -2,12 +2,6 @@ default:
   server:
     port: 7000
     host: '127.0.0.1'
-  redis:
-    port: 6379                # redis server port
-    host: '127.0.0.1'         # redis host
-    password: ''              # to use with AUTH
-    db: 1                     # the test db
-    options: {}
   amqp:
     host: 'localhost'
     port: 5672
@@ -17,16 +11,9 @@ default:
     authMechanism: 'AMQPLAIN'
     noDelay: true
 test:
-  redis:
-    db: 12
+
 production:
   server:
     port: 8000
     host: '127.0.0.1'
-  redis:
-    port: 6379                # redis server port
-    host: 'redis1.megam.co.in'         # redis host
-    password: ''              # to use with AUTH
-    db: 1                     # the test db
-    options: {}
 
