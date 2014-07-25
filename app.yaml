@@ -16,4 +16,11 @@ production:
   server:
     port: 8000
     host: '127.0.0.1'
-
+  amqp:
+    host: 'localhost'
+    port: 5672
+    login: 'guest'
+    password: 'guest'
+    connectionTimeout: 0
+    authMechanism: 'AMQPLAIN'
+    noDelay: true
