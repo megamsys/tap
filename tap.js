@@ -32,6 +32,7 @@ server.listen(yaml.config.server.port);
 console.log("Tap Server:" + yaml.version + " listening on port ="
                 + yaml.config.server.port);
 
+
 /* It is sends the index.html file */
 app.get('/:id', function(req, res) {
         /**
