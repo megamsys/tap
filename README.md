@@ -3,7 +3,7 @@ tap
 
 A multitenant realtime streaming framework.
 
-“Tap” project which provides a cloud based real-time streaming using in-memory cloud hash(redis) and nodejs. This provides a powerful idea on streaming based on an URL. 
+“Tap” project which provides a cloud based real-time streaming using in-memory cloud message(rabbitmq) and nodejs. This provides a powerful idea on streaming based on an URL. 
 
 This approach can be extend to cloud integration using our RESTful connector bed(deccanplato) which provides connectors for various Cloud Application(Salesforce, Google App..Zoho, Xero…).
 
@@ -14,34 +14,40 @@ This approach can be extend to cloud integration using our RESTful connector bed
 [Socket.io +](http://socket.io/)
 [Express framework ]
 
-[Redis](http://redis.io/)
-
-[Logstash](http://logstash.net/)
+[heka](https://hekad.readthedocs.org/)
 
 [deccanplato](https://github.com/indykish/deccanplato/)[(Optional)]
 
-### Logstash Configuration file
+### heka Configuration file(hekad.toml)
 
 ```
-input {
-  file {
-    type => "tomcat-access-log"
-    path => "/home/ubuntu/tomcat/logs/localhost_access_log.2013-03-06.txt"
-  }
-}
- 
-output {
-  stdout { debug => true debug_format => "json"}
-  redis {
-     key => "logstashTest"
-     data_type => "channel"
-     host => "redis"
-  }
-}
-```
-Logstash Agent will be run on every node using a configurable ”<x>.conf” file which says “What log file to watch, and where to drop it in ?”.
+[logOUT]
+type = "LogstreamerInput"
+log_directory = "/var/log/nginx/"
+file_match = 'access.log'
+differentiator = ["log_out"]
 
-Let us watch the following  log location “/home/ubuntu/tomcat/logs/localhost_access_log.2013-03-06.txt” and dumps it to the output channel “logstashtest“.
+[logERR]
+type = "LogstreamerInput"
+log_directory = "/var/log/nginx/"
+file_match = 'error.log'
+differentiator = ["log_error"]
+
+[AMQPOutput]
+url = "amqp://username:password@www.megam.rabbitmq.co/"
+exchange = "megam_exc"
+queue = true
+exchangeType = "fanout"
+message_matcher = 'TRUE'
+encoder = "JsonEncoder"
+
+[JsonEncoder]
+fields = [ "Timestamp", "Type", "Logger", "Payload", "Hostname" ]
+
+```
+Heka demon will be run on every node using a configurable ”<x>.toml” file which says “What log file to watch, and where to drop it in ?”.
+
+Let us watch the following  log location “/var/log/nginx/access.log” and dumps it to the output queue “log_out“.
 
 ### Configuring `app.yaml`
 
@@ -52,25 +58,28 @@ default:
   server:
     port: 7000
     host: '127.0.0.1'
-  redis:
-    port: 6379                # redis server port
-    host: '127.0.0.1'         # redis host
-    password: ''              # to use with AUTH
-    db: 1                     # the test db
-    options: {}
+  amqp:
+    host: 'localhost'
+    port: 5672
+    login: 'username'
+    password: 'password'
+    connectionTimeout: 0
+    authMechanism: 'AMQPLAIN'
+    noDelay: true
 test:
-  redis:
-    db: 12
+
 production:
   server:
     port: 8000
     host: '127.0.0.1'
-  redis:
-    port: 6379                # redis server port
-    host: 'redis-master.megam.co.in'         # redis host
-    password: ''              # to use with AUTH
-    db: 1                     # the test db
-    options: {}
+  amqp:
+    host: 'localhost'
+    port: 5672
+    login: 'username'
+    password: 'password'
+    connectionTimeout: 0
+    authMechanism: 'AMQPLAIN'
+    noDelay: true
 ```
 You can flip the switch in tap_cluster.js to (“–conf=development” or “–conf==production” when you start the tap_monitor.js)
 
@@ -82,25 +91,25 @@ For example switch on "-conf=development" then `socket = io.connect('http://loca
 
 ###1. Clone Tap
 
-`$ git clone https://github.com/indykish/tap.git`
+`$ git clone https://github.com/megamsys/tap.git`
 
 ###2. Start Tap
  	
 `$ node tap_monitor.js`
 
-###3. Start Redis server
+###3. Start Rabbitmq server
 
-`$ redis-server`
+`$ rabbitmqctl start`
 
-###4. Run Logstash -  type following command in your terminal
+###4. Run Heka -  type following command in your terminal
 
-`$ java -jar logstash-1.1.9-monolithic.jar agent -f test1.conf`
+`$ hekad -confid "path/to/conf.toml"`
 
 ###5. Start a Tomcat container in port 8080.
 
-Ensure that you perform something on the tomcat container, just to make sure the logs get populated. You should notice some activity in your logstash console.
+Ensure that you perform something on the nginx container, just to make sure the logs get populated. You should notice some activity in your heka console.
 
-###6. Type the URL on your favorite browser and enjoy the live streaming http://localhost:7000/streams/logstashtest
+###6. Type the URL on your favorite browser and enjoy the live streaming http://localhost:7000/streams/log_out
 
 
 We are glad to help if you have questions, or request for new features..
