@@ -5,7 +5,6 @@ A multitenant realtime streaming framework.
 
 “Tap” project which provides a cloud based real-time streaming using in-memory cloud message(rabbitmq) and nodejs. This provides a powerful idea on streaming based on an URL. 
 
-This approach can be extend to cloud integration using our RESTful connector bed(deccanplato) which provides connectors for various Cloud Application(Salesforce, Google App..Zoho, Xero…).
 
 ### Requirements
 
@@ -16,7 +15,6 @@ This approach can be extend to cloud integration using our RESTful connector bed
 
 [heka](https://hekad.readthedocs.org/)
 
-[deccanplato](https://github.com/indykish/deccanplato/)[(Optional)]
 
 ### heka Configuration file(hekad.toml)
 
@@ -114,15 +112,15 @@ Ensure that you perform something on the nginx container, just to make sure the 
 
 We are glad to help if you have questions, or request for new features..
 
-[twitter](http://twitter.com/indykish) [email](<rajthilak@megam.co.in>)
+[twitter](http://twitter.com/megamsys) [email](<rajthilak@megam.io>)
 
 # License
 
 
 |                      |                                          |
 |:---------------------|:-----------------------------------------|
-| **Author:**          | Rajthilak (<rajthilak@megam.co.in>)
-| **Copyright:**       | Copyright (c) 2012-2013 Megam Systems.
+| **Author:**          | Rajthilak (<rajthilak@megam.io>)
+| **Copyright:**       | Copyright (c) 2013-15 Megam Systems.
 | **License:**         | Apache License, Version 2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
